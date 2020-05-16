@@ -10,6 +10,10 @@ class GraphNode
     GraphNode();
     GraphNode(std::string id, std::string answer);
     ~GraphNode();
+    GraphNode(const GraphNode &source);             // Copy constructor
+    GraphNode &operator=(const GraphNode &source);  // Copy assignment operator
+    GraphNode(GraphNode &&source);                  // Move constructor
+    GraphNode &operator=(GraphNode &&source);       // Move assignment operator
 
   private:
     std::string _answer;
