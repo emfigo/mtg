@@ -60,3 +60,27 @@ GraphNode &GraphNode::operator=(GraphNode &&source)
 
   return *this;
 }
+
+void GraphNode::addParentEdge(GraphEdge *edge)
+{
+  _parentEdges.push_back(edge);
+}
+
+void GraphNode::addChildEdge(std::unique_ptr<GraphEdge> edge)
+{
+  _childEdges.emplace_back(std::move(edge));
+}
+
+GraphNode *GraphNode::findChild(std::string word)
+{
+  GraphNode *ptr = nullptr;
+
+  for(const std::unique_ptr<GraphEdge> &edge: _childEdges){
+    if( edge->containsKeyword(word) ){
+      ptr = edge->getChildNode();
+      break;
+    }
+  }
+
+  return ptr;
+}

@@ -2,9 +2,11 @@
 #define GRAPHNODE_H_
 
 #include <iostream>
+#include <memory>
 #include <string>
 #include <vector>
 
+// Forward Declaration
 class GraphEdge;
 
 class GraphNode
@@ -18,11 +20,15 @@ class GraphNode
     GraphNode(GraphNode &&source);                  // Move constructor
     GraphNode &operator=(GraphNode &&source);       // Move assignment operator
 
+    void addParentEdge(GraphEdge *edge);
+    void addChildEdge(std::unique_ptr<GraphEdge> edge);
+    GraphNode *findChild(std::string word);
+
   private:
     std::string _answer;
     std::string _id;
-    std::vector<GraphEdge> _parentEdges;
-    std::vector<GraphEdge> _childEdges;
+    std::vector<GraphEdge *> _parentEdges;
+    std::vector<std::unique_ptr<GraphEdge>> _childEdges;
 };
 
 #endif /* GRAPHNODE_H_ */
