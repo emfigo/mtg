@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+
+class GraphEdge;
 
 class GraphNode
 {
@@ -18,6 +21,8 @@ class GraphNode
   private:
     std::string _answer;
     std::string _id;
+    std::vector<GraphEdge> _parentEdges;
+    std::vector<GraphEdge> _childEdges;
 };
 
 #endif /* GRAPHNODE_H_ */

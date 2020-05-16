@@ -1,3 +1,4 @@
+#include "graph_edge.h"
 #include "graph_node.h"
 
 GraphNode::GraphNode()

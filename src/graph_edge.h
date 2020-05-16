@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include "graph_node.h"
+class GraphNode;
 
 class GraphEdge
 {

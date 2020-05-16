@@ -1,4 +1,5 @@
 #include "graph_edge.h"
+#include "graph_node.h"
 
 GraphEdge::GraphEdge(std::shared_ptr<GraphNode> parent, std::shared_ptr<GraphNode> child, std::vector<std::string> keywords) : _parentNode(parent), _childNode(child)
 {
