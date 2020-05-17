@@ -76,7 +76,7 @@ std::shared_ptr<GraphNode> GraphNode::findChild(std::string word)
   std::shared_ptr<GraphNode> ptr;
 
   for(const std::unique_ptr<GraphEdge> &edge: _childEdges){
-    if( edge->containsKeyword(word) ){
+    if( edge->containsKeywordIgnoreCase(word) ){
       ptr = edge->getChildNode();
       break;
     }
