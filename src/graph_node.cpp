@@ -14,7 +14,7 @@ GraphNode::GraphNode(std::string id, std::string answer) : _id(id), _answer(answ
 
 GraphNode::~GraphNode()
 {
-  std::cout << "Calling node destructor" << std::endl;
+  std::cout << "Calling Graph Node destructor with id " << _id << std::endl;
 }
 
 GraphNode::GraphNode(const GraphNode &source)
@@ -71,9 +71,9 @@ void GraphNode::addChildEdge(std::unique_ptr<GraphEdge> edge)
   _childEdges.emplace_back(std::move(edge));
 }
 
-GraphNode *GraphNode::findChild(std::string word)
+std::shared_ptr<GraphNode> GraphNode::findChild(std::string word)
 {
-  GraphNode *ptr = nullptr;
+  std::shared_ptr<GraphNode> ptr;
 
   for(const std::unique_ptr<GraphEdge> &edge: _childEdges){
     if( edge->containsKeyword(word) ){
@@ -83,4 +83,14 @@ GraphNode *GraphNode::findChild(std::string word)
   }
 
   return ptr;
+}
+
+std::string GraphNode::getAnswer()
+{
+  return _answer;
+}
+
+std::string GraphNode::getID()
+{
+  return _id;
 }

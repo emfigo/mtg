@@ -9,11 +9,15 @@
 class ChatBot
 {
   public:
-    ChatBot(GraphNode &&root);
+    ChatBot();
+    ChatBot(std::shared_ptr<GraphNode> root);
     ~ChatBot();
 
+    std::string question();
+    void answerFor(std::string sentence);
+
   private:
-    GraphNode _rootNode;
+    std::shared_ptr<GraphNode> _rootNode;
     std::shared_ptr<GraphNode> _currentNode;
 };
 
