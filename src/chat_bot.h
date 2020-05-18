@@ -17,6 +17,8 @@ class ChatBot
     void answerFor(std::string sentence);
 
   private:
+    const std::string DATAPATH = "../";
+    const std::string ANSWERFILE = "answergraph.yml";
     std::shared_ptr<GraphNode> _rootNode;
     std::shared_ptr<GraphNode> _currentNode;
 };

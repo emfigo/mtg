@@ -18,7 +18,7 @@ edges:
   2:
     parent: 1
     child: 2
-    keywords: [diet]
+    keywords: [diet, food]
   3:
     parent: 2
     child: 3

@@ -1,8 +1,11 @@
 #include "chat_bot.h"
+#include "graph_loader.h"
 
 ChatBot::ChatBot()
 {
-  std::cout << "Hello from ChatBot Constructor without memory allocation" << std::endl;
+  std::cout << "Hello from ChatBot Constructor with default root" << std::endl;
+  _rootNode = GraphLoader::loadGraph("../src/answergraph.yml");
+  _currentNode = _rootNode;
 }
 
 ChatBot::ChatBot(std::shared_ptr<GraphNode> root) : _rootNode(root), _currentNode(root)
