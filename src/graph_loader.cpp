@@ -1,40 +1,68 @@
 #include "graph_edge.h"
 #include "graph_node.h"
 #include "graph_loader.h"
-#include "yaml-cpp/yaml.h"
 
-std::shared_ptr<GraphNode> GraphLoader::loadGraph(std::string relativePath)
+GraphLoader::GraphLoader(std::string relativePath)
 {
-  std::map<std::string, std::shared_ptr<GraphNode>> nodeMap;
-
+  std::cout << "Hello from GraphLoader Constructor" << std::endl;
   YAML::Node config = YAML::LoadFile(relativePath);
   YAML::Node nodes = config["nodes"];
+  loadNodes(nodes);
 
+  YAML::Node edges = config["edges"];
+  loadEdges(edges);
+}
+
+GraphLoader::~GraphLoader()
+{
+  std::cout << "Hello from GraphLoader Destructor" << std::endl;
+}
+
+std::shared_ptr<GraphNode> GraphLoader::getRootNode()
+{
+  return _nodeMap["root"];
+}
+
+std::shared_ptr<GraphNode> GraphLoader::getDefaultNode()
+{
+  return _nodeMap["default"];
+}
+
+void GraphLoader::loadNodes(YAML::Node nodes)
+{
   for(YAML::const_iterator it = nodes.begin(); it != nodes.end(); it++)
   {
     YAML::Node node = it -> second;
     std::string id = it->first.as<std::string>();
     std::string answer = node["answer"].as<std::string>();
     std::shared_ptr<GraphNode> graphNode(new GraphNode(id, answer));
-    nodeMap[id] = graphNode;
+    _nodeMap[id] = graphNode;
   }
+}
 
-  YAML::Node edges = config["edges"];
-
+void GraphLoader::loadEdges(YAML::Node edges)
+{
   for(YAML::const_iterator it = edges.begin(); it != edges.end(); it++)
   {
     YAML::Node edge = it -> second;
     std::string parentKey = edge["parent"].as<std::string>();
-    std::string childKey = edge["child"].as<std::string>();
-    std::vector<std::string> keywords = edge["keywords"].as<std::vector<std::string>>();
+    std::string childKey;
+    if (edge["child"].IsDefined())
+      childKey= edge["child"].as<std::string>();
 
-    std::shared_ptr<GraphNode> parent = nodeMap[parentKey];
-    std::shared_ptr<GraphNode> child = nodeMap[childKey];
+    std::vector<std::string> keywords;
+    if (edge["keywords"].IsDefined())
+      keywords = edge["keywords"].as<std::vector<std::string>>();
+
+    std::shared_ptr<GraphNode> parent = _nodeMap[parentKey];
+    std::shared_ptr<GraphNode> child;
+    if (!childKey.empty())
+      child = _nodeMap[childKey];
 
     std::unique_ptr<GraphEdge> graphEdge(new GraphEdge(parent.get(), child, keywords));
-    child->addParentEdge(graphEdge.get());
     parent->addChildEdge(std::move(graphEdge));
-  }
 
-  return nodeMap["root"];
+    if (child != nullptr)
+      child->addParentEdge(graphEdge.get());
+  }
 }

@@ -4,8 +4,10 @@
 ChatBot::ChatBot()
 {
   std::cout << "Hello from ChatBot Constructor with default root" << std::endl;
-  _rootNode = GraphLoader::loadGraph("../src/answergraph.yml");
+  GraphLoader loader = GraphLoader(DATAPATH + ANSWERFILE);
+  _rootNode = loader.getRootNode();
   _currentNode = _rootNode;
+  _defaultNode = loader.getDefaultNode();
 }
 
 ChatBot::ChatBot(std::shared_ptr<GraphNode> root) : _rootNode(root), _currentNode(root)

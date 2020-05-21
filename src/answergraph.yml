@@ -8,9 +8,15 @@ nodes:
   2:
     answer: "Cool ! Which one are you interested in?"
   3:
-    answer: "Right. An Omnivore is an animal or person that eats a variety of food of both plant and animal origin. Would you like to know all the animals with this chracteristic ?"
+    answer: "Right. An omnivore is an animal or person that eats a variety of food of both plant and animal origin. Would you like to know all the animals with this chracteristic ?"
+  4:
+    answer: "Right. A carnivore is an animal that feeds on other animals. Would you like to know all the animals with this chracteristic ?"
+  5:
+    answer: "Right. An herbivore is an animal that eats only plants. Would you like to know all the animals with this chracteristic ?"
 
 edges:
+  default:
+    parent: 1
   1:
     parent: root
     child: 1
@@ -23,4 +29,11 @@ edges:
     parent: 2
     child: 3
     keywords: [omnivore]
-
+  4:
+    parent: 2
+    child: 4
+    keywords: [carnivore]
+  5:
+    parent: 2
+    child: 5
+    keywords: [herbivore]
