@@ -8,6 +8,7 @@ ChatBot::ChatBot()
   _rootNode = loader.getRootNode();
   _currentNode = _rootNode;
   _defaultNode = loader.getDefaultNode();
+  _useDefault = false;
 }
 
 ChatBot::ChatBot(std::shared_ptr<GraphNode> root) : _rootNode(root), _currentNode(root)
@@ -22,15 +23,24 @@ ChatBot::~ChatBot()
 
 std::string ChatBot::question()
 {
-  return _currentNode->getAnswer();
+  return _useDefault ? _defaultNode->getAnswer() : _currentNode->getAnswer();
 }
 
 void ChatBot::answerFor(std::string sentence)
 {
-  std::shared_ptr<GraphNode> ptr = _currentNode->findChild(sentence);
-  if (ptr != nullptr){
-    _currentNode = ptr;
+  std::shared_ptr<GraphNode> ptr;
+  if (_useDefault) {
+    ptr = _defaultNode->findChild(sentence);
   } else {
-    _currentNode = _rootNode;
+    ptr = _currentNode->findChild(sentence);
+  }
+
+  if (ptr != nullptr){
+    _useDefault = false;
+    _currentNode = ptr;
+  }else if(!_useDefault) {
+    _useDefault = true;
+  } else {
+    _useDefault = false;
   }
 }

@@ -15,8 +15,10 @@ nodes:
     answer: "Right. An herbivore is an animal that eats only plants. Would you like to know all the animals with this chracteristic ?"
 
 edges:
-  default:
-    parent: 1
+  0:
+    parent: default
+    child: 1
+    keywords: [yes]
   1:
     parent: root
     child: 1

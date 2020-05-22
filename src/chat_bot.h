@@ -19,9 +19,12 @@ class ChatBot
   private:
     const std::string DATAPATH = "../src/";
     const std::string ANSWERFILE = "answergraph.yml";
+
     std::shared_ptr<GraphNode> _rootNode;
     std::shared_ptr<GraphNode> _currentNode;
     std::shared_ptr<GraphNode> _defaultNode;
+
+    bool _useDefault;
 };
 
 #endif /* CHATBOT_H_ */
