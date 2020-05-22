@@ -71,12 +71,12 @@ void GraphNode::addChildEdge(std::unique_ptr<GraphEdge> edge)
   _childEdges.emplace_back(std::move(edge));
 }
 
-std::shared_ptr<GraphNode> GraphNode::findChild(std::string word)
+std::shared_ptr<GraphNode> GraphNode::findChild(std::string sentence)
 {
   std::shared_ptr<GraphNode> ptr;
 
   for(const std::unique_ptr<GraphEdge> &edge: _childEdges){
-    if( edge->containsKeywordIgnoreCase(word) ){
+    if( edge->containsKeywordIgnoreCase(sentence) ){
       ptr = edge->getChildNode();
       break;
     }

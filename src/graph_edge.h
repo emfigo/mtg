@@ -16,8 +16,8 @@ class GraphEdge
     ~GraphEdge();
     GraphNode *getParentNode();
     std::shared_ptr<GraphNode> getChildNode();
-    bool containsKeyword(std::string keyword);
-    bool containsKeywordIgnoreCase(std::string keyword);
+    bool containsKeyword(std::string sentence);
+    bool containsKeywordIgnoreCase(std::string sentence);
 
   private:
     GraphNode *_parentNode;

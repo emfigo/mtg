@@ -24,7 +24,7 @@ class GraphNode
     void addChildEdge(std::unique_ptr<GraphEdge> edge);
     std::string getAnswer();
     std::string getID();
-    std::shared_ptr<GraphNode> findChild(std::string word);
+    std::shared_ptr<GraphNode> findChild(std::string sentence);
 
   private:
     std::string _answer;

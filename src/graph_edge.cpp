@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <sstream>
 #include <cctype>
 #include "graph_edge.h"
 #include "graph_node.h"
@@ -26,15 +27,35 @@ std::shared_ptr<GraphNode> GraphEdge::getChildNode()
   return _childNode;
 }
 
-bool GraphEdge::containsKeyword(std::string keyword)
+bool GraphEdge::containsKeyword(std::string sentence)
 {
-  return (bool) _keywords[keyword];
+  std::istringstream words(sentence);
+  int output = 0;
+
+  for(std::string word; words >> word;){
+    if (_keywords[word]){
+      output = 1;
+      break;
+    }
+  }
+
+  return (bool) output;
 }
 
-bool GraphEdge::containsKeywordIgnoreCase(std::string keyword)
+bool GraphEdge::containsKeywordIgnoreCase(std::string sentence)
 {
-  std::transform(keyword.begin(), keyword.end(), keyword.begin(),
-    [](unsigned char c){ return std::tolower(c); });
+  std::istringstream words(sentence);
+  int output = 0;
 
-  return (bool) _keywords[keyword];
+  for(std::string word; words >> word;){
+    std::transform(word.begin(), word.end(), word.begin(),
+        [](unsigned char c){ return std::tolower(c); });
+
+    if (_keywords[word]){
+      output = 1;
+      break;
+    }
+  }
+
+  return (bool) output;
 }

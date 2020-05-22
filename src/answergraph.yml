@@ -4,14 +4,16 @@ nodes:
   root:
     answer: "Hi ! Would you like to speak about the animal kingdom ?"
   1:
-    answer: "Nice ! Let's start from which type of animal you would like to speak. For example base on diet?"
+    answer: "Nice ! Let's select which group of animals you would like to speak more about (e.g diet). If you want to know the existing groups just let me know !"
   2:
-    answer: "Cool ! Which one are you interested in?"
+    answer: "The groups are:\nDiet\nLifestyle\nConservation Status\nType"
   3:
-    answer: "Right. An omnivore is an animal or person that eats a variety of food of both plant and animal origin. Would you like to know all the animals with this chracteristic ?"
+    answer: "Cool ! Which one are you interested in?"
   4:
-    answer: "Right. A carnivore is an animal that feeds on other animals. Would you like to know all the animals with this chracteristic ?"
+    answer: "Right. An omnivore is an animal or person that eats a variety of food of both plant and animal origin. Would you like to know all the animals with this chracteristic ?"
   5:
+    answer: "Right. A carnivore is an animal that feeds on other animals. Would you like to know all the animals with this chracteristic ?"
+  6:
     answer: "Right. An herbivore is an animal that eats only plants. Would you like to know all the animals with this chracteristic ?"
 
 edges:
@@ -26,16 +28,24 @@ edges:
   2:
     parent: 1
     child: 2
-    keywords: [diet, food]
+    keywords: [tell, more, group, groups, existing]
   3:
     parent: 2
     child: 3
-    keywords: [omnivore]
+    keywords: [diet, food]
   4:
-    parent: 2
+    parent: 1
+    child: 3
+    keywords: [diet, food]
+  5:
+    parent: 3
+    child: 4
+    keywords: [omnivore]
+  6:
+    parent: 3
     child: 4
     keywords: [carnivore]
-  5:
-    parent: 2
+  7:
+    parent: 3
     child: 5
     keywords: [herbivore]
