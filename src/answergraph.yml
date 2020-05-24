@@ -28,7 +28,7 @@ edges:
   2:
     parent: 1
     child: 2
-    keywords: [tell, more, group, groups, existing]
+    keywords: [group, groups, existing]
   3:
     parent: 2
     child: 3
@@ -43,9 +43,9 @@ edges:
     keywords: [omnivore]
   6:
     parent: 3
-    child: 4
+    child: 5
     keywords: [carnivore]
   7:
     parent: 3
-    child: 5
+    child: 6
     keywords: [herbivore]
