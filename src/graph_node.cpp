@@ -42,8 +42,19 @@ GraphNode::GraphNode(GraphNode &&source)
   std::cout << "Calling GraphNode move constructor" << std::endl;
   _answer = source._answer;
   _id = source._id;
+
   source._answer = std::string();
   source._id = std::string();
+
+  for(GraphEdge *ptr: source._parentEdges){
+    _parentEdges.push_back(ptr);
+  }
+  source._parentEdges.clear();
+
+  for(auto &&ptr: source._childEdges){
+    _childEdges.emplace_back(std::move(ptr));
+  }
+  source._childEdges.clear();
 }
 
 GraphNode &GraphNode::operator=(GraphNode &&source)
@@ -55,8 +66,19 @@ GraphNode &GraphNode::operator=(GraphNode &&source)
 
   _answer = source._answer;
   _id = source._id;
+
   source._answer = std::string();
   source._id = std::string();
+
+  for(GraphEdge *ptr: source._parentEdges){
+    _parentEdges.push_back(ptr);
+  }
+  source._parentEdges.clear();
+
+  for(auto &&ptr: source._childEdges){
+    _childEdges.emplace_back(std::move(ptr));
+  }
+  source._childEdges.clear();
 
   return *this;
 }

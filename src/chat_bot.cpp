@@ -11,7 +11,7 @@ ChatBot::ChatBot()
   _useDefault = false;
 }
 
-ChatBot::ChatBot(std::shared_ptr<GraphNode> root) : _rootNode(root), _currentNode(root)
+ChatBot::ChatBot(std::shared_ptr<GraphNode> rootNode, std::shared_ptr<GraphNode> defaultNode) : _rootNode(rootNode), _currentNode(rootNode), _defaultNode(defaultNode)
 {
   std::cout << "Hello from ChatBot Constructor" << std::endl;
 }

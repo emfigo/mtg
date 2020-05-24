@@ -10,7 +10,7 @@ class ChatBot
 {
   public:
     ChatBot();
-    ChatBot(std::shared_ptr<GraphNode> root);
+    ChatBot(std::shared_ptr<GraphNode> rootNode, std::shared_ptr<GraphNode> defaultNode);
     ~ChatBot();
 
     std::string question();

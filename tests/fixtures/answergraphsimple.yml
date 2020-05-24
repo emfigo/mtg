@@ -1,0 +1,23 @@
+nodes:
+  default:
+    answer: "Default Answer"
+  root:
+    answer: "Root Answer"
+  1:
+    answer: "1 Answer"
+  2:
+    answer: "2 Answer"
+
+edges:
+  0:
+    parent: default
+    child: 1
+    keywords: [yes]
+  1:
+    parent: root
+    child: 1
+    keywords: [yes]
+  2:
+    parent: root
+    child: 2
+    keywords: [no]

@@ -15,8 +15,6 @@ class GraphNode
     GraphNode();
     GraphNode(std::string id, std::string answer);
     ~GraphNode();
-    GraphNode(const GraphNode &source);             // Copy constructor
-    GraphNode &operator=(const GraphNode &source);  // Copy assignment operator
     GraphNode(GraphNode &&source);                  // Move constructor
     GraphNode &operator=(GraphNode &&source);       // Move assignment operator
 
@@ -31,6 +29,10 @@ class GraphNode
     std::string _id;
     std::vector<GraphEdge *> _parentEdges;
     std::vector<std::unique_ptr<GraphEdge>> _childEdges;
+
+    // Not allow copy operations
+    GraphNode(const GraphNode &source);             // Copy constructor
+    GraphNode &operator=(const GraphNode &source);  // Copy assignment operator
 };
 
 #endif /* GRAPHNODE_H_ */
