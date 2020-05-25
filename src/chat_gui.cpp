@@ -42,6 +42,7 @@ ChatBotFrame::ChatBotFrame(const wxString &title) : wxFrame(NULL, wxID_ANY, titl
     font.SetPointSize(font.GetPointSize() + 2);
     _userTextCtrl->SetFont(font);
     _userTextCtrl->SetForegroundColour(wxColour(255,255,255));
+    _userTextCtrl->SetBackgroundColour(wxColour(41, 52, 100));
 
 
     // create vertical sizer for panel alignment and add panels
