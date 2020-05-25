@@ -51,8 +51,8 @@ GraphNode::GraphNode(GraphNode &&source)
   }
   source._parentEdges.clear();
 
-  for(auto &&ptr: source._childEdges){
-    _childEdges.emplace_back(std::move(ptr));
+  for(auto &&[id, edge]: source._childEdges){
+    _childEdges[id] = std::move(edge);
   }
   source._childEdges.clear();
 }
@@ -75,8 +75,8 @@ GraphNode &GraphNode::operator=(GraphNode &&source)
   }
   source._parentEdges.clear();
 
-  for(auto &&ptr: source._childEdges){
-    _childEdges.emplace_back(std::move(ptr));
+  for(auto &&[id, edge]: source._childEdges){
+    _childEdges[id] = std::move(edge);
   }
   source._childEdges.clear();
 
@@ -90,14 +90,16 @@ void GraphNode::addParentEdge(GraphEdge *edge)
 
 void GraphNode::addChildEdge(std::unique_ptr<GraphEdge> edge)
 {
-  _childEdges.emplace_back(std::move(edge));
+  std::string id = edge->getChildNode()->getID();
+
+  _childEdges[id] = std::move(edge);
 }
 
 std::shared_ptr<GraphNode> GraphNode::findChild(std::string sentence)
 {
   std::shared_ptr<GraphNode> ptr;
 
-  for(const std::unique_ptr<GraphEdge> &edge: _childEdges){
+  for(const auto &[id, edge]: _childEdges){
     if( edge->containsKeywordIgnoreCase(sentence) ){
       ptr = edge->getChildNode();
       break;
@@ -105,6 +107,16 @@ std::shared_ptr<GraphNode> GraphNode::findChild(std::string sentence)
   }
 
   return ptr;
+}
+
+bool GraphNode::isLeaf()
+{
+  return _childEdges.empty();
+}
+
+std::shared_ptr<GraphNode> GraphNode::findChildByID(std::string id)
+{
+  return _childEdges.find(id) != _childEdges.end() ? _childEdges[id]->getChildNode() : nullptr;
 }
 
 std::string GraphNode::getAnswer()

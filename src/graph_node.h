@@ -2,6 +2,7 @@
 #define GRAPHNODE_H_
 
 #include <iostream>
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
@@ -22,13 +23,15 @@ class GraphNode
     void addChildEdge(std::unique_ptr<GraphEdge> edge);
     std::string getAnswer();
     std::string getID();
+    bool isLeaf();
     std::shared_ptr<GraphNode> findChild(std::string sentence);
+    std::shared_ptr<GraphNode> findChildByID(std::string id);
 
   private:
     std::string _answer;
     std::string _id;
     std::vector<GraphEdge *> _parentEdges;
-    std::vector<std::unique_ptr<GraphEdge>> _childEdges;
+    std::map<std::string, std::unique_ptr<GraphEdge>> _childEdges;
 
     // Not allow copy operations
     GraphNode(const GraphNode &source);             // Copy constructor

@@ -110,7 +110,7 @@ TEST_CASE( "When getting the id from a graph node", "[getID]" ) {
   }
 }
 
-TEST_CASE( "When finding a child node based on a sentence", "[findChild]" ) {
+TEST_CASE( "Finding a child node based on a sentence", "[findChild]" ) {
 
   std::string id = "12345";
   std::string answer = "some answer";
@@ -144,6 +144,61 @@ TEST_CASE( "When finding a child node based on a sentence", "[findChild]" ) {
 
     SECTION ( "Returns the expected child node" ){
       REQUIRE( node.findChild(searchSentence) == childNode );
+    }
+  }
+}
+
+TEST_CASE( "Checking if a node is a leave", "[isLeaf]" ) {
+  std::string id = "12345";
+  std::string answer = "some answer";
+
+  SECTION ( "When the node has no childs" ) {
+    GraphNode node = GraphNode(id, answer);
+
+    SECTION ( "Returns true" ){
+      REQUIRE( node.isLeaf() == true );
+    }
+  }
+
+  SECTION ( "When the node has at least one child" ) {
+    GraphNode node = GraphNode(id, answer);
+
+    std::string keyword = "keyword";
+    std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer));
+    std::vector<std::string> keywords = { keyword };
+    std::unique_ptr<GraphEdge> edge(new GraphEdge(childNode.get(), childNode, keywords));
+    node.addChildEdge(std::move(edge));
+
+    SECTION ( "Returns false" ){
+      REQUIRE( node.isLeaf() == false );
+    }
+  }
+}
+
+TEST_CASE( "Finding a child node based on ID", "[findChildByID]" ) {
+  std::string id = "12345";
+  std::string answer = "some answer";
+
+  SECTION ( "When the id exists" ) {
+    GraphNode node = GraphNode(id, answer);
+
+    std::string keyword = "keyword";
+    std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer));
+    std::vector<std::string> keywords = { keyword };
+    std::unique_ptr<GraphEdge> edge(new GraphEdge(childNode.get(), childNode, keywords));
+    node.addChildEdge(std::move(edge));
+
+    SECTION ( "Returns expected node" ){
+      REQUIRE( node.findChildByID(id) == childNode );
+    }
+  }
+
+  SECTION ( "When the id does not exists" ) {
+    GraphNode node = GraphNode(id, answer);
+    std::string nonExistingID = "noexisting1234id";
+
+    SECTION ( "Returns nullptr" ){
+      REQUIRE( node.findChildByID(nonExistingID) == nullptr );
     }
   }
 }
