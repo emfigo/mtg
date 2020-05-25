@@ -10,13 +10,13 @@ project(mtg)
 find_package(wxWidgets REQUIRED COMPONENTS core base)
 include(${wxWidgets_USE_FILE})
 
-file(GLOB project_SRCS ${CMAKE_SOURCE_DIR}/src/*.cpp)
 file(GLOB graph_SRCS ${CMAKE_SOURCE_DIR}/src/graph_*.cpp)
 file(GLOB chat_SRCS ${CMAKE_SOURCE_DIR}/src/chat_*.cpp)
 
 add_subdirectory(third-party/Catch2)
 add_subdirectory(third-party/yaml-cpp)
-add_executable(mtg ${project_SRCS})
+
+add_executable(mtg ${graph_SRCS} ${chat_SRCS})
 
 add_library(graph ${graph_SRCS})
 target_link_libraries(graph PRIVATE yaml-cpp)
@@ -33,5 +33,3 @@ target_link_libraries(mtg
     ${wxWidgets_LIBRARIES})
 
 add_subdirectory(tests)
-add_subdirectory(tests/integration)
-
