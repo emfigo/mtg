@@ -21,12 +21,18 @@ ChatBot::~ChatBot()
   std::cout << "Hello from ChatBot Destructor" << std::endl;
 }
 
-std::string ChatBot::question()
+void ChatBot::startFromBeginning()
+{
+  _currentNode = _rootNode;
+    _useDefault = false;
+}
+
+std::string ChatBot::getAnswer()
 {
   return _useDefault ? _defaultNode->getAnswer() : _currentNode->getAnswer();
 }
 
-void ChatBot::answerFor(std::string sentence)
+void ChatBot::makeQuestion(std::string sentence)
 {
   std::shared_ptr<GraphNode> ptr;
   if (_useDefault) {

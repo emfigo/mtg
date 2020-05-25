@@ -61,9 +61,9 @@ void ChatBotFrame::OnEnter(wxCommandEvent &WXUNUSED(event))
     _userTextCtrl->Clear();
 
     // send user text to chatbot
-    _panelDialog->GetChatBot()->answerFor(std::string(userText.mb_str()));
+    _panelDialog->GetChatBot()->makeQuestion(std::string(userText.mb_str()));
 
-    _panelDialog->PrintChatbotResponse(_panelDialog->GetChatBot()->question());
+    _panelDialog->PrintChatbotResponse(_panelDialog->GetChatBot()->getAnswer());
 }
 
 BEGIN_EVENT_TABLE(ChatBotFrameImagePanel, wxPanel)
@@ -119,7 +119,7 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     _chatBot = std::make_unique<ChatBot>();
 
     // print first dialog
-    PrintChatbotResponse(_chatBot->question());
+    PrintChatbotResponse(_chatBot->getAnswer());
 
 }
 

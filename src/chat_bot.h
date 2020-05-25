@@ -13,8 +13,9 @@ class ChatBot
     ChatBot(std::shared_ptr<GraphNode> rootNode, std::shared_ptr<GraphNode> defaultNode);
     ~ChatBot();
 
-    std::string question();
-    void answerFor(std::string sentence);
+    std::string getAnswer();
+    void makeQuestion(std::string sentence);
+    void startFromBeginning();
 
   private:
     const std::string DATAPATH = "../src/";
