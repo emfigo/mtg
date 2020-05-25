@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <memory>
+#include <vector>
 
 #include "graph_node.h"
 
@@ -13,7 +14,7 @@ class ChatBot
     ChatBot(std::shared_ptr<GraphNode> rootNode, std::shared_ptr<GraphNode> defaultNode);
     ~ChatBot();
 
-    std::string getAnswer();
+    std::vector<std::string> getAnswer();
     void makeQuestion(std::string sentence);
     void startFromBeginning();
 

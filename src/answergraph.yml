@@ -2,19 +2,17 @@ nodes:
   default:
     answer: "Sorry I don't have an answer for that ! Would you like to speak about something else ?"
   root:
-    answer: "Hi ! Would you like to speak about the animal kingdom ?"
+    answer: "Hi ! I'm Chat Bot and I know a few things about the animal kingdom. Would you like to know more ?"
   1:
-    answer: "Nice ! Let's select which group of animals you would like to speak more about (e.g diet). If you want to know the existing groups just let me know !"
+    answer: "Nice ! There are a few groups to classify animals ! Tell me which one would you like to speak of (e.g diet) or if you want me to tell you the existing groups just let me know !"
   2:
-    answer: "The groups are:\nDiet\nLifestyle\nConservation Status\nType"
+    answer: "The groups that I currently know are based on:\nDiet\nLifestyle\nConservation Status\n Wich one would you like more about ?"
   3:
-    answer: "Cool ! Which one are you interested in?"
+    answer: "Right ! We have the following based on diet: \n An omnivore is an animal or person that eats a variety of food of both plant and animal origin.\n A carnivore is an animal that feeds on other animals.\n An herbivore is an animal that eats only plants."
   4:
-    answer: "Right. An omnivore is an animal or person that eats a variety of food of both plant and animal origin. Would you like to know all the animals with this chracteristic ?"
+    answer: "This one is a simple one the lifestyle means whether the animal is solitary or sociable !"
   5:
-    answer: "Right. A carnivore is an animal that feeds on other animals. Would you like to know all the animals with this chracteristic ?"
-  6:
-    answer: "Right. An herbivore is an animal that eats only plants. Would you like to know all the animals with this chracteristic ?"
+    answer: "The conservation status of a species is an indicator of the likelihood of that species remaining extant either in the present day or the near future. Many factors are taken into account when assessing the conservation status of a species. As categories we can find least concern, near threatened, conservation dependent, threatened, vulnerable species, endangered species, critically endangered, extinct in the wild and extinct."
 
 edges:
   0:
@@ -38,14 +36,18 @@ edges:
     child: 3
     keywords: [diet, food]
   5:
-    parent: 3
+    parent: 1
     child: 4
-    keywords: [omnivore]
+    keywords: [lifestyle]
   6:
-    parent: 3
-    child: 5
-    keywords: [carnivore]
+    parent: 2
+    child: 4
+    keywords: [lifestyle]
   7:
-    parent: 3
-    child: 6
-    keywords: [herbivore]
+    parent: 1
+    child: 5
+    keywords: [conservation, status]
+  8:
+    parent: 2
+    child: 5
+    keywords: [conservation, status]

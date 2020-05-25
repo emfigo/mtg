@@ -14,7 +14,11 @@ TEST_CASE( "Moving inside the default graph in the chatbot" ) {
     bot.startFromBeginning();
 
     SECTION ( "Returns the root node answer" ){
-      REQUIRE( bot.getAnswer() == "Hi ! Would you like to speak about the animal kingdom ?" );
+      std::vector<std::string> expectedAnswer = {
+        "Hi ! I'm Chat Bot and I know a few things about the animal kingdom. Would you like to know more ?"
+      };
+
+      REQUIRE( bot.getAnswer() == expectedAnswer);
     }
   }
 
@@ -23,7 +27,11 @@ TEST_CASE( "Moving inside the default graph in the chatbot" ) {
     bot.makeQuestion("yes");
 
     SECTION ( "Returns the expected node answer" ){
-      REQUIRE( bot.getAnswer() == "Nice ! Let's select which group of animals you would like to speak more about (e.g diet). If you want to know the existing groups just let me know !" );
+      std::vector<std::string> expectedAnswer = {
+        "Nice ! There are a few groups to classify animals ! Tell me which one would you like to speak of (e.g diet) or if you want me to tell you the existing groups just let me know !"
+      };
+
+      REQUIRE( bot.getAnswer() == expectedAnswer);
     }
   }
 
@@ -32,7 +40,11 @@ TEST_CASE( "Moving inside the default graph in the chatbot" ) {
     bot.makeQuestion("maybe");
 
     SECTION ( "Returns the default node answer" ){
-      REQUIRE( bot.getAnswer() == "Sorry I don't have an answer for that ! Would you like to speak about something else ?" );
+      std::vector<std::string> expectedAnswer = {
+        "Sorry I don't have an answer for that ! Would you like to speak about something else ?"
+      };
+
+      REQUIRE( bot.getAnswer() == expectedAnswer);
     }
   }
 }
@@ -46,7 +58,11 @@ TEST_CASE( "Selecting a custom graph in the chatbot" ) {
     bot.startFromBeginning();
 
     SECTION ( "Returns the root node answer" ){
-      REQUIRE( bot.getAnswer() == "Root Answer" );
+      std::vector<std::string> expectedAnswer = {
+        "Root Answer"
+      };
+
+      REQUIRE( bot.getAnswer() == expectedAnswer);
     }
   }
 
@@ -55,7 +71,11 @@ TEST_CASE( "Selecting a custom graph in the chatbot" ) {
     bot.makeQuestion("yes");
 
     SECTION ( "Returns the expected node answer" ){
-      REQUIRE( bot.getAnswer() == "1 Answer" );
+      std::vector<std::string> expectedAnswer = {
+        "1 Answer"
+      };
+
+      REQUIRE( bot.getAnswer() == expectedAnswer);
     }
   }
 
@@ -64,7 +84,11 @@ TEST_CASE( "Selecting a custom graph in the chatbot" ) {
     bot.makeQuestion("maybe");
 
     SECTION ( "Returns the default node answer" ){
-      REQUIRE( bot.getAnswer() == "Default Answer" );
+      std::vector<std::string> expectedAnswer = {
+        "Default Answer"
+      };
+
+      REQUIRE( bot.getAnswer() == expectedAnswer);
     }
   }
 }

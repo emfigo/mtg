@@ -27,9 +27,17 @@ void ChatBot::startFromBeginning()
     _useDefault = false;
 }
 
-std::string ChatBot::getAnswer()
+std::vector<std::string> ChatBot::getAnswer()
 {
-  return _useDefault ? _defaultNode->getAnswer() : _currentNode->getAnswer();
+  std::vector<std::string> output;
+
+  if(_useDefault) {
+    output.push_back(_defaultNode->getAnswer());
+  } else {
+    output.push_back(_currentNode->getAnswer());
+  }
+
+  return output;
 }
 
 void ChatBot::makeQuestion(std::string sentence)
