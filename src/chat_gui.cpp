@@ -38,6 +38,12 @@ ChatBotFrame::ChatBotFrame(const wxString &title) : wxFrame(NULL, wxID_ANY, titl
     _userTextCtrl = new wxTextCtrl(ctrlPanel, idTextXtrl, "", wxDefaultPosition, wxSize(width, 50), wxTE_PROCESS_ENTER, wxDefaultValidator, wxTextCtrlNameStr);
     Connect(idTextXtrl, wxEVT_TEXT_ENTER, wxCommandEventHandler(ChatBotFrame::OnEnter));
 
+    wxFont font = _userTextCtrl->GetFont();
+    font.SetPointSize(font.GetPointSize() + 2);
+    _userTextCtrl->SetFont(font);
+    _userTextCtrl->SetForegroundColour(wxColour(255,255,255));
+
+
     // create vertical sizer for panel alignment and add panels
     wxBoxSizer *vertBoxSizer = new wxBoxSizer(wxVERTICAL);
     vertBoxSizer->AddSpacer(90);
@@ -89,7 +95,7 @@ void ChatBotFrameImagePanel::paintNow()
 void ChatBotFrameImagePanel::render(wxDC &dc)
 {
     // load backgroud image from file
-    wxString imgFile = imgBasePath + "sf_bridge.jpg";
+    wxString imgFile = imgBasePath + "background.jpg";
     wxImage image;
     image.LoadFile(imgFile);
 
@@ -164,7 +170,7 @@ void ChatBotPanelDialog::paintNow()
 void ChatBotPanelDialog::render(wxDC &dc)
 {
     wxImage image;
-    image.LoadFile(imgBasePath + "sf_bridge_inner.jpg");
+    image.LoadFile(imgBasePath + "inner.jpg");
 
     wxSize sz = this->GetSize();
     wxImage imgSmall = image.Rescale(sz.GetWidth(), sz.GetHeight(), wxIMAGE_QUALITY_HIGH);
@@ -194,5 +200,5 @@ ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel *parent, wxString text, b
     _chatBotTxt->Wrap(150);
 
     // set background color
-    this->SetBackgroundColour((isFromUser == true ? wxT("YELLOW") : wxT("BLUE")));
+    this->SetBackgroundColour((isFromUser == true ? wxColour(71, 140, 118) : wxColour(41, 52, 100)));
 }
