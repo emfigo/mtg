@@ -1,3 +1,5 @@
+#include <tuple>
+
 #include "graph_edge.h"
 #include "graph_node.h"
 
@@ -51,8 +53,8 @@ GraphNode::GraphNode(GraphNode &&source)
   }
   source._parentEdges.clear();
 
-  for(auto &&[id, edge]: source._childEdges){
-    _childEdges[id] = std::move(edge);
+  for(auto &tup: source._childEdges){
+    _childEdges[tup.first] = std::move(tup.second);
   }
   source._childEdges.clear();
 }
@@ -75,8 +77,8 @@ GraphNode &GraphNode::operator=(GraphNode &&source)
   }
   source._parentEdges.clear();
 
-  for(auto &&[id, edge]: source._childEdges){
-    _childEdges[id] = std::move(edge);
+  for(auto &tup: source._childEdges){
+    _childEdges[tup.first] = std::move(tup.second);
   }
   source._childEdges.clear();
 
@@ -99,9 +101,9 @@ std::shared_ptr<GraphNode> GraphNode::findChild(std::string sentence)
 {
   std::shared_ptr<GraphNode> ptr;
 
-  for(const auto &[id, edge]: _childEdges){
-    if( edge->containsKeywordIgnoreCase(sentence) ){
-      ptr = edge->getChildNode();
+  for(const auto &tup: _childEdges){
+    if( tup.second->containsKeywordIgnoreCase(sentence) ){
+      ptr = tup.second->getChildNode();
       break;
     }
   }
