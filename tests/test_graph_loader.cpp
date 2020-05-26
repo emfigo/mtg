@@ -20,11 +20,8 @@ TEST_CASE( "When getting root node from an answer graph", "[getRootNode]" ) {
     REQUIRE( node->getAnswer() == "Root Answer" );
   }
 
-  SECTION ( "Navigates to the correct child when keyword present" ){
-    std::shared_ptr<GraphNode> child = node->findChild("yes");
-
-    REQUIRE( child->getID() == "1" );
-    REQUIRE( child->getAnswer() == "1 Answer" );
+  SECTION ( "Returns the root node is a topic node" ){
+    REQUIRE( node->getTopic() == "Topic" );
   }
 
   SECTION ( "Navigates to the correct child when keyword present" ){
@@ -32,11 +29,21 @@ TEST_CASE( "When getting root node from an answer graph", "[getRootNode]" ) {
 
     REQUIRE( child->getID() == "1" );
     REQUIRE( child->getAnswer() == "1 Answer" );
+    REQUIRE( child->getTopic() == "" );
+  }
+
+  SECTION ( "Navigates to the correct child when keyword present" ){
+    std::shared_ptr<GraphNode> child = node->findChild("yes");
+
+    REQUIRE( child->getID() == "1" );
+    REQUIRE( child->getAnswer() == "1 Answer" );
+    REQUIRE( child->getTopic() == "" );
 
     child = node->findChild("no");
 
     REQUIRE( child->getID() == "2" );
     REQUIRE( child->getAnswer() == "2 Answer" );
+    REQUIRE( child->getTopic() == "" );
   }
 
   SECTION ( "Returns nullptr when keyword not present" ){

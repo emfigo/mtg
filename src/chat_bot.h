@@ -2,10 +2,12 @@
 #define CHATBOT_H_
 
 #include <iostream>
+#include <tuple>
 #include <memory>
 #include <vector>
 
-#include "graph_node.h"
+// forward declaration
+class GraphNode;
 
 class ChatBot
 {
@@ -26,7 +28,14 @@ class ChatBot
     std::shared_ptr<GraphNode> _currentNode;
     std::shared_ptr<GraphNode> _defaultNode;
 
+    // flags
     bool _useDefault;
+
+    // memory
+    std::vector<std::pair<std::string, std::shared_ptr<GraphNode>>> _topics;
+
+    // helpers
+    std::shared_ptr<GraphNode> generateNodeForSpokenTopic();
 };
 
 #endif /* CHATBOT_H_ */

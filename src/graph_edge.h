@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+// forward declaration
 class GraphNode;
 
 class GraphEdge

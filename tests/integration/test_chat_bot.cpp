@@ -70,9 +70,10 @@ TEST_CASE( "Selecting a custom graph in the chatbot" ) {
     bot.startFromBeginning();
     bot.makeQuestion("yes");
 
-    SECTION ( "Returns the expected node answer" ){
+    SECTION ( "Returns the expected node answer pluse the end of the graph answer" ){
       std::vector<std::string> expectedAnswer = {
-        "1 Answer"
+        "1 Answer",
+        "Sorry I'm afraid I don't have more topics to speak about ... So let's start again"
       };
 
       REQUIRE( bot.getAnswer() == expectedAnswer);

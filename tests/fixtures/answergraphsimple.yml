@@ -3,7 +3,7 @@ nodes:
     answer: "Default Answer"
   root:
     answer: "Root Answer"
-    topic: true
+    topic: Topic
   1:
     answer: "1 Answer"
   2:
