@@ -11,11 +11,12 @@ TEST_CASE( "When moving a graph node", "[GraphNode]" ) {
 
   std::string id = "12345";
   std::string answer = "some answer";
+  std::string topic = std::string();
 
-  GraphNode source = GraphNode(id, answer);
+  GraphNode source = GraphNode(id, answer, topic);
 
   std::string keyword = "keyword";
-  std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer));
+  std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer, topic));
   std::vector<std::string> keywords = { keyword };
   std::unique_ptr<GraphEdge> edge(new GraphEdge(childNode.get(), childNode, keywords));
   source.addChildEdge(std::move(edge));
@@ -42,11 +43,12 @@ TEST_CASE( "When moving a graph node with assigment", "[operator=]" ) {
 
   std::string id = "12345";
   std::string answer = "some answer";
+  std::string topic = std::string();
 
-  GraphNode source = GraphNode(id, answer);
+  GraphNode source = GraphNode(id, answer, topic);
 
   std::string keyword = "keyword";
-  std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer));
+  std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer, topic));
   std::vector<std::string> keywords = { keyword };
   std::unique_ptr<GraphEdge> edge(new GraphEdge(childNode.get(), childNode, keywords));
   source.addChildEdge(std::move(edge));
@@ -81,8 +83,9 @@ TEST_CASE( "When getting the answer from a graph node", "[getAnswer]" ) {
   }
 
   SECTION ( "And uses a constructor specifiying an answer" ) {
+    std::string topic = std::string();
     std::string answer = "some answer in the node";
-    GraphNode node = GraphNode("someid", answer);
+    GraphNode node = GraphNode("someid", answer, topic);
 
     SECTION ( "Contains the expected answer" ){
       REQUIRE( node.getAnswer() == answer );
@@ -102,7 +105,8 @@ TEST_CASE( "When getting the id from a graph node", "[getID]" ) {
 
   SECTION ( "And uses a constructor specifiying an id" ) {
     std::string id = "123456";
-    GraphNode node = GraphNode(id, "some answer");
+    std::string topic = std::string();
+    GraphNode node = GraphNode(id, "some answer", topic);
 
     SECTION ( "Contains the expected id" ){
       REQUIRE( node.getID() == id );
@@ -114,11 +118,12 @@ TEST_CASE( "Finding a child node based on a sentence", "[findChild]" ) {
 
   std::string id = "12345";
   std::string answer = "some answer";
+  std::string topic = std::string();
 
-  GraphNode node = GraphNode(id, answer);
+  GraphNode node = GraphNode(id, answer, topic);
 
   std::string keyword = "keyword";
-  std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer));
+  std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer, topic));
   std::vector<std::string> keywords = { keyword };
   std::unique_ptr<GraphEdge> edge(new GraphEdge(childNode.get(), childNode, keywords));
   node.addChildEdge(std::move(edge));
@@ -151,9 +156,10 @@ TEST_CASE( "Finding a child node based on a sentence", "[findChild]" ) {
 TEST_CASE( "Checking if a node is a leave", "[isLeaf]" ) {
   std::string id = "12345";
   std::string answer = "some answer";
+  std::string topic = std::string();
 
   SECTION ( "When the node has no childs" ) {
-    GraphNode node = GraphNode(id, answer);
+    GraphNode node = GraphNode(id, answer, topic);
 
     SECTION ( "Returns true" ){
       REQUIRE( node.isLeaf() == true );
@@ -161,10 +167,10 @@ TEST_CASE( "Checking if a node is a leave", "[isLeaf]" ) {
   }
 
   SECTION ( "When the node has at least one child" ) {
-    GraphNode node = GraphNode(id, answer);
+    GraphNode node = GraphNode(id, answer, topic);
 
     std::string keyword = "keyword";
-    std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer));
+    std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer, topic));
     std::vector<std::string> keywords = { keyword };
     std::unique_ptr<GraphEdge> edge(new GraphEdge(childNode.get(), childNode, keywords));
     node.addChildEdge(std::move(edge));
@@ -178,12 +184,13 @@ TEST_CASE( "Checking if a node is a leave", "[isLeaf]" ) {
 TEST_CASE( "Finding a child node based on ID", "[findChildByID]" ) {
   std::string id = "12345";
   std::string answer = "some answer";
+  std::string topic = std::string();
 
   SECTION ( "When the id exists" ) {
-    GraphNode node = GraphNode(id, answer);
+    GraphNode node = GraphNode(id, answer, topic);
 
     std::string keyword = "keyword";
-    std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer));
+    std::shared_ptr<GraphNode> childNode(new GraphNode(id, answer, topic));
     std::vector<std::string> keywords = { keyword };
     std::unique_ptr<GraphEdge> edge(new GraphEdge(childNode.get(), childNode, keywords));
     node.addChildEdge(std::move(edge));
@@ -194,11 +201,41 @@ TEST_CASE( "Finding a child node based on ID", "[findChildByID]" ) {
   }
 
   SECTION ( "When the id does not exists" ) {
-    GraphNode node = GraphNode(id, answer);
+    GraphNode node = GraphNode(id, answer, topic);
     std::string nonExistingID = "noexisting1234id";
 
     SECTION ( "Returns nullptr" ){
       REQUIRE( node.findChildByID(nonExistingID) == nullptr );
+    }
+  }
+}
+
+TEST_CASE( "Checking if a node contains a topic", "[getTopic]" ) {
+  std::string id = "12345";
+  std::string answer = "some answer";
+
+  SECTION ( "When the node has a topic" ) {
+    std::string topic = "topic";
+    GraphNode node = GraphNode(id, answer, topic);
+
+    SECTION ( "Returns the expected topic" ){
+      REQUIRE( node.getTopic() == topic );
+    }
+  }
+
+  SECTION ( "When the node does not contain a topic" ) {
+    GraphNode node = GraphNode(id, answer, std::string());
+
+    SECTION ( "Returns an empty string" ){
+      REQUIRE( node.getTopic() == std::string() );
+    }
+  }
+
+  SECTION ( "When using an empty node" ) {
+    GraphNode node = GraphNode();
+
+    SECTION ( "Returns an empty string" ){
+      REQUIRE( node.getTopic() == std::string() );
     }
   }
 }

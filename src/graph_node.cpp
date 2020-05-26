@@ -1,13 +1,13 @@
 #include "graph_edge.h"
 #include "graph_node.h"
 
-GraphNode::GraphNode()
+GraphNode::GraphNode() : _id(std::string()), _answer(std::string()), _topic(std::string())
 {
   std::cout << "Hello from node constructor without memory allocation" << std::endl;
 }
 
 
-GraphNode::GraphNode(std::string id, std::string answer) : _id(id), _answer(answer)
+GraphNode::GraphNode(std::string id, std::string answer, std::string topic) : _id(id), _answer(answer), _topic(topic)
 {
   std::cout << "Hello from Node constructor with id " << _id << " with answer " << _answer << std::endl;
 }
@@ -112,6 +112,11 @@ std::shared_ptr<GraphNode> GraphNode::findChild(std::string sentence)
 bool GraphNode::isLeaf()
 {
   return _childEdges.empty();
+}
+
+std::string GraphNode::getTopic()
+{
+  return _topic;
 }
 
 std::shared_ptr<GraphNode> GraphNode::findChildByID(std::string id)

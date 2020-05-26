@@ -7,6 +7,7 @@ nodes:
     answer: "Nice ! There are a few groups to classify animals ! Tell me which one would you like to speak of (e.g diet) or if you want me to tell you the existing groups just let me know !"
   2:
     answer: "The groups that I currently know are based on:\nDiet\nLifestyle\nConservation Status\n Wich one would you like more about ?"
+    topic: groups
   3:
     answer: "Right ! We have the following based on diet: \n An omnivore is an animal or person that eats a variety of food of both plant and animal origin.\n A carnivore is an animal that feeds on other animals.\n An herbivore is an animal that eats only plants."
   4:

@@ -35,7 +35,11 @@ void GraphLoader::loadNodes(YAML::Node nodes)
     YAML::Node node = it -> second;
     std::string id = it->first.as<std::string>();
     std::string answer = node["answer"].as<std::string>();
-    std::shared_ptr<GraphNode> graphNode(new GraphNode(id, answer));
+    std::string topic = std::string();
+    if (node["topic"].IsDefined())
+      topic = node["topic"].as<std::string>();
+
+    std::shared_ptr<GraphNode> graphNode(new GraphNode(id, answer, topic));
     _nodeMap[id] = graphNode;
   }
 }

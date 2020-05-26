@@ -10,9 +10,10 @@
 TEST_CASE( "When getting parent node of a graph edge", "[getParentNode]" ) {
   std::string id = "12345";
   std::string answer = "some answer";
+  std::string topic = std::string();
   std::string keyword = "keyword";
 
-  std::shared_ptr<GraphNode> node(new GraphNode(id, answer));
+  std::shared_ptr<GraphNode> node(new GraphNode(id, answer, topic));
 
   std::vector<std::string> keywords = { keyword };
 
@@ -36,9 +37,10 @@ TEST_CASE( "When getting parent node of a graph edge", "[getParentNode]" ) {
 TEST_CASE( "When getting child node of a graph edge", "[getChildNode]" ) {
   std::string id = "12345";
   std::string answer = "some answer";
+  std::string topic = std::string();
   std::string keyword = "keyword";
 
-  std::shared_ptr<GraphNode> node(new GraphNode(id, answer));
+  std::shared_ptr<GraphNode> node(new GraphNode(id, answer, topic));
 
   std::vector<std::string> keywords = { keyword };
 
@@ -62,9 +64,10 @@ TEST_CASE( "When getting child node of a graph edge", "[getChildNode]" ) {
 TEST_CASE( "Check contains keyword in sentence case sensitive", "[containsKeyword]" ) {
   std::string id = "12345";
   std::string answer = "some answer";
+  std::string topic = std::string();
   std::string keyword = "keyword";
 
-  std::shared_ptr<GraphNode> node(new GraphNode(id, answer));
+  std::shared_ptr<GraphNode> node(new GraphNode(id, answer, topic));
 
   std::vector<std::string> keywords = { keyword };
 
@@ -98,9 +101,10 @@ TEST_CASE( "Check contains keyword in sentence case sensitive", "[containsKeywor
 TEST_CASE( "Check contains keyword in sentence case insensitive", "[containsKeywordIgnoreCase]" ) {
   std::string id = "12345";
   std::string answer = "some answer";
+  std::string topic = std::string();
   std::string keyword = "keyword";
 
-  std::shared_ptr<GraphNode> node(new GraphNode(id, answer));
+  std::shared_ptr<GraphNode> node(new GraphNode(id, answer, topic));
 
   std::vector<std::string> keywords = { keyword };
 
