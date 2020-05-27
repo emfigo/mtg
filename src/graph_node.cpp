@@ -5,30 +5,30 @@
 
 GraphNode::GraphNode() : _id(std::string()), _answer(std::string()), _topic(std::string())
 {
-  std::cout << "Hello from node constructor without memory allocation" << std::endl;
+  std::cout << "GraphNode constructor without memory allocation" << std::endl;
 }
 
 
 GraphNode::GraphNode(std::string id, std::string answer, std::string topic) : _id(id), _answer(answer), _topic(topic)
 {
-  std::cout << "Hello from Node constructor with id " << _id << " with answer " << _answer << std::endl;
+  std::cout << "GraphNode constructor with id " << _id << std::endl;
 }
 
 GraphNode::~GraphNode()
 {
-  std::cout << "Calling Graph Node destructor with id " << _id << std::endl;
+  std::cout << "GraphNode destructor with id " << _id << std::endl;
 }
 
 GraphNode::GraphNode(const GraphNode &source)
 {
-  std::cout << "Calling GraphNode copy constructor" << std::endl;
+  std::cout << "GraphNode copy constructor with id " << source._id << std::endl;
   _answer = source._answer;
   _id = source._id;
 }
 
 GraphNode &GraphNode::operator=(const GraphNode &source)
 {
-  std::cout << "Calling GraphNode copy assigment operator" << std::endl;
+  std::cout << "GraphNode copy assigment operator with id " << source._id << std::endl;
 
   if (this == &source)
     return *this;
@@ -41,7 +41,7 @@ GraphNode &GraphNode::operator=(const GraphNode &source)
 
 GraphNode::GraphNode(GraphNode &&source)
 {
-  std::cout << "Calling GraphNode move constructor" << std::endl;
+  std::cout << "GraphNode move constructor with id " << source._id << std::endl;
   _answer = source._answer;
   _id = source._id;
 
@@ -61,7 +61,7 @@ GraphNode::GraphNode(GraphNode &&source)
 
 GraphNode &GraphNode::operator=(GraphNode &&source)
 {
-  std::cout << "Calling GraphNode move assigment operator" << std::endl;
+  std::cout << "GraphNode move assigment operator with id " << source._id << std::endl;
 
   if (this == &source)
     return *this;

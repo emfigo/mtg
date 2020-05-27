@@ -4,7 +4,7 @@
 
 GraphLoader::GraphLoader(std::string relativePath)
 {
-  std::cout << "Hello from GraphLoader Constructor" << std::endl;
+  std::cout << "GraphLoader constructor" << std::endl;
   YAML::Node config = YAML::LoadFile(relativePath);
   YAML::Node nodes = config["nodes"];
   loadNodes(nodes);
@@ -15,7 +15,7 @@ GraphLoader::GraphLoader(std::string relativePath)
 
 GraphLoader::~GraphLoader()
 {
-  std::cout << "Hello from GraphLoader Destructor" << std::endl;
+  std::cout << "GraphLoader destructor" << std::endl;
 }
 
 std::shared_ptr<GraphNode> GraphLoader::getRootNode()

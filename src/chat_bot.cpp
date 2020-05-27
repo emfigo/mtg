@@ -5,7 +5,7 @@
 
 ChatBot::ChatBot() : _useDefault(false)
 {
-  std::cout << "Hello from ChatBot Constructor with default root" << std::endl;
+  std::cout << "ChatBot constructor with default root" << std::endl;
   GraphLoader loader = GraphLoader(DATAPATH + ANSWERFILE);
   _rootNode = loader.getRootNode();
   _currentNode = _rootNode;
@@ -14,12 +14,12 @@ ChatBot::ChatBot() : _useDefault(false)
 
 ChatBot::ChatBot(std::shared_ptr<GraphNode> rootNode, std::shared_ptr<GraphNode> defaultNode) : _rootNode(rootNode), _currentNode(rootNode), _defaultNode(defaultNode), _useDefault(false)
 {
-  std::cout << "Hello from ChatBot Constructor" << std::endl;
+  std::cout << "ChatBot constructor" << std::endl;
 }
 
 ChatBot::~ChatBot()
 {
-  std::cout << "Hello from ChatBot Destructor" << std::endl;
+  std::cout << "ChatBot destructor" << std::endl;
 }
 
 void ChatBot::startFromBeginning()
