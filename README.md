@@ -43,9 +43,10 @@ This project is inspired in Udacity Chatbot. From here I decided to simplify the
 
 ## Basic Build Instructions
 
-1. Clone this repo.
-2. Make a build directory in the top level directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
+1. Clone this repo with the submodules `git clone --recursive https://github.com/emfigo/mtg.git`.
+2. cd into project `cd mtg`
+3. Make a build directory in the top level directory: `mkdir build && cd build`
+4. Compile: `cmake .. && make`
 
 ### Running tests
 
@@ -62,5 +63,5 @@ For integration tests:
 ```
 
 ## Running the ChatBot locally
-1. Go to the build directory `cd build`
+1. Go to the build directory `cd build` if you are not already there.
 2. Run it: `./mtg`.
